@@ -30,18 +30,48 @@
 		    background-repeat: no-repeat;
 		    background-color: #FFFFFF; /* Optional: Set a background color to fill empty areas */
 		}
+
+		#input1 {
+			left :500px;
+			top :550px;
+		}
+		#input2 {
+			left :500px;
+			top :700px;
+		}
+		#input3 {
+			left :1200px;
+			top :550px;
+		}
+		#input4 {
+			left :1200px;
+			top :700px;
+		}
+		#submit {
+			left :1250px;
+			top :750px;
+		}
 	</style>
 </head>
 <body>
 
-<input type="text" id="userInput1"/>
-<input type="text" id="userInput2"/>
-<input type="text" id="userInput3"/>
-<input type="text" id="userInput4"/>
+	<div id="input1">
+		<input type="text" id="userInput1"/>
+	</div>
+
+	<div id="input2">
+		<input type="text" id="userInput2"/>
+	</div>
+	<div id="input3">
+		<input type="text" id="userInput3"/>
+	</div>
+	<div id="input4">
+		<input type="text" id="userInput4"/>
+	</div>
 
 
     <!-- Button to Capture the Input -->
-    <button onclick="showInput()">Submit</button>
+    <button id="submit" onclick="showInput()">Submit</button>
 
     <p id="displayResult"></p>
 
