@@ -14,14 +14,20 @@
 		    border: none; /* Remove border for aesthetics */
 		}
 
+		html, body {
+		    margin: 0;
+		    padding: 0;
+		    height: 100%; /* Ensure the container spans the full viewport */
+		}
+
 		body {
-			background-image: url('/lessons/exponentials/exponentialq1.png');
-			margin: 0;
-			background-position: top center;
-            height: 100vh; /* Full viewport height */
-            background-size: cover; /* Ensures the image scales to cover the viewport */
-            background-position: center; /* Centers the image */
-            background-repeat: no-repeat; /* Prevents tiling */
+		    margin: 0;
+		    height: 100vh;
+		    background-image: url('/lessons/exponentials/exponentialq1.png');
+		    background-size: contain; /* Ensure the whole image fits within the viewport */
+		    background-position: top center; /* Anchor the top of the image */
+		    background-repeat: no-repeat;
+		    background-color: #000; /* Optional: Set a background color to fill empty areas */
 		}
 	</style>
 </head>
