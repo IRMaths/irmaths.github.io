@@ -35,23 +35,9 @@
 <body>
 
 
+
 </body>
 <script type="text/javascript">
-document.body.classList.add('noscroll');
-
-    // Function to request fullscreen on page load
-    function enableFullscreen() {
-        const element = document.documentElement; // Target the entire page
-        if (element.requestFullscreen) {
-            element.requestFullscreen();
-        } else if (element.webkitRequestFullscreen) { // Safari compatibility
-            element.webkitRequestFullscreen();
-        } else if (element.msRequestFullscreen) { // IE compatibility
-            element.msRequestFullscreen();
-        }
-    }
-
-    // Trigger fullscreen on page load
-    window.onload = enableFullscreen;
+	document.body.classList.add('noscroll');
 </script>
 </html>
