@@ -34,10 +34,20 @@
 </head>
 <body>
 
+<input type="text" id="userInput" placeholder="Enter something here..." />
 
+    <!-- Button to Capture the Input -->
+    <button onclick="showInput()">Submit</button>
+
+    <p id="displayResult"></p>
 
 </body>
 <script type="text/javascript">
 	document.body.classList.add('noscroll');
+	// Function to get and display the input text
+	function showInput() {
+	    var userInput = document.getElementById('userInput').value; // Get the value from the input box
+	    document.getElementById('displayResult').textContent = "You entered: " + userInput; // Display the result
+	}
 </script>
 </html>
