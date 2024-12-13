@@ -5,31 +5,34 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Growth and Decay</title>
 	<style>
-		/* Add this CSS class to disable scrolling */
-		.noscroll {
-		    overflow: hidden;
-		}
+	  /* Reset margin and padding for the body */
+	  body, html {
+	    margin: 0;
+	    padding: 0;
+	    width: 100%;
+	    height: 100%;
+	    overflow: hidden; /* Prevent scrollbars */
+	    background-color: #000; /* Optional: Set background color to black for consistency */
+	  }
 
-		iframe {
-		    border: none; /* Remove border for aesthetics */
-		}
+	  /* Ensure the iframe container takes full space */
+	  .iframe-container {
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    margin: 0;
+	    padding: 0;
+	  }
 
-		html, body {
-		    margin: 0;
-		    padding: 0;
-		    height: 100%; /* Ensure the container spans the full viewport */
-		}
+	  /* Make the iframe fill the container */
+	  .iframe-container iframe {
+	    width: 100%;
+	    height: 100%;
+	    border: none; /* Remove borders */
+	  }
 
-		body {
-		    margin: 0;
-		    border: 1px solid black;
-		    height: 100vh;
-		    background-image: url('/lessons/exponentials/exponentialq1.png');
-		    background-size: contain; /* Ensure the whole image fits within the viewport */
-		    background-position: top center; /* Anchor the top of the image */
-		    background-repeat: no-repeat;
-		    background-color: #FFFFFF; /* Optional: Set a background color to fill empty areas */
-		}
 
 		#input1 {
 			position: absolute;
@@ -59,21 +62,19 @@
 	</style>
 </head>
 <body>
-
-	<div id="input1">
-		<input type="text" id="userInput1"/>
+	<div class="iframe-container">
+	  <iframe allowtransparency="true" style="background: #9BCFE6;"
+	    src="https://docs.google.com/presentation/d/e/2PACX-1vSeYcT5oVXTzfa0v2Znte6ifz7SfQiJVKGe8fWqYylfmtqYk8ZWkWdqBk-BdX7-B-1wHfpR3mgoiriS/embed?start=false&loop=false&rm=minimal" 
+	    allowfullscreen="true" 
+	    mozallowfullscreen="true" 
+	    webkitallowfullscreen="true">
+	  </iframe>
 	</div>
 
-	<div id="input2">
-		<input type="text" id="userInput2"/>
-	</div>
-	<div id="input3">
-		<input type="text" id="userInput3"/>
-	</div>
-	<div id="input4">
-		<input type="text" id="userInput4"/>
-	</div>
-
+	<div id="input1"><input type="text" id="userInput1"/></div>
+	<div id="input2"><input type="text" id="userInput2"/></div>
+	<div id="input3"><input type="text" id="userInput3"/></div>
+	<div id="input4"><input type="text" id="userInput4"/></div>
 
     <!-- Button to Capture the Input -->
     <button id="submit" onclick="showInput()">Submit</button>
