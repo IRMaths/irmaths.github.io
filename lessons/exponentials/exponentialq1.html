@@ -1,85 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Growth and Decay</title>
-	<style>
-	  /* Reset margin and padding for the body */
-	  body, html {
-	    margin: 0;
-	    padding: 0;
-	    width: 100%;
-	    height: 100%;
-	    overflow: hidden; /* Prevent scrollbars */
-	  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Growth and Decay</title>
+  <style>
+    /* Reset margin and padding for the body */
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden; /* Prevent scrollbars */
+    }
 
-	  /* Ensure the iframe container takes full space */
-	  .iframe-container {
-	    width: 100%;
-	    height: 100%;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    margin: 0;
-	    padding: 0;
-	  }
+    /* Ensure the iframe container takes full space */
+    .iframe-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
 
-	  /* Make the iframe fill the container */
-	  .iframe-container iframe {
-	    width: 100%;
-	    height: 100%;
-	    border: none; /* Remove borders */
-	  }
+    /* Make the iframe fill the container */
+    .iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none; /* Remove borders */
+    }
 
-		#input1 {
-			position: absolute;
-			left : 20vw;
-			top : 60vh;
-			height: 50px;
-		}
-		#input2 {
-			position: absolute;
-			left : 20vw;
-			top : 75vh;
-		}
-		#input3 {
-			position: absolute;
-			left : 75vw;
-			top : 60vh;
-		}
-		#input4 {
-			position: absolute;
-			left : 75vw;
-			top : 75vh;
-		}
+    #input1 {
+      position: absolute;
+      left : 20vw;
+      top : 60vh;
+      height: 50px;
+    }
+    #input2 {
+      position: absolute;
+      left : 20vw;
+      top : 75vh;
+    }
+    #input3 {
+      position: absolute;
+      left : 75vw;
+      top : 60vh;
+    }
+    #input4 {
+      position: absolute;
+      left : 75vw;
+      top : 75vh;
+    }
 
-		#submit {
-			position: absolute;
-			left : 90vw;
-			top : 90vh;
-		}
+    #submit {
+      position: absolute;
+      left : 90vw;
+      top : 90vh;
+    }
 
-		svg {
-			cursor: pointer;
-		}
+    svg {
+      cursor: pointer;
+    }
 
-	</style>
+  </style>
 </head>
 <body>
-	<div class="iframe-container">
-	  <iframe 
-	    src="https://docs.google.com/presentation/d/e/2PACX-1vSeYcT5oVXTzfa0v2Znte6ifz7SfQiJVKGe8fWqYylfmtqYk8ZWkWdqBk-BdX7-B-1wHfpR3mgoiriS/embed?start=false&loop=false&rm=minimal" 
-	    allowfullscreen="true" 
-	    mozallowfullscreen="true" 
-	    webkitallowfullscreen="true">
-	  </iframe>
-	</div>
+  <div class="iframe-container">
+    <iframe 
+      src="https://docs.google.com/presentation/d/e/2PACX-1vSeYcT5oVXTzfa0v2Znte6ifz7SfQiJVKGe8fWqYylfmtqYk8ZWkWdqBk-BdX7-B-1wHfpR3mgoiriS/embed?start=false&loop=false&rm=minimal" 
+      allowfullscreen="true" 
+      mozallowfullscreen="true" 
+      webkitallowfullscreen="true">
+    </iframe>
+  </div>
 
-	<div id="input1"><input type="text" id="userInput1"/></div>
-	<div id="input2"><input type="text" id="userInput2"/></div>
-	<div id="input3"><input type="text" id="userInput3"/></div>
-	<div id="input4"><input type="text" id="userInput4"/></div>
+  <div id="input1"><input type="text" id="userInput1"/></div>
+  <div id="input2"><input type="text" id="userInput2"/></div>
+  <div id="input3"><input type="text" id="userInput3"/></div>
+  <div id="input4"><input type="text" id="userInput4"/></div>
 
 
 
@@ -89,11 +89,11 @@
 </body>
 
 <script type="text/javascript">
-	document.body.classList.add('noscroll');
-	// Function to get and display the input text
-	function showInput() {
-	    var userInput = document.getElementById('userInput').value; // Get the value from the input box
-	    document.getElementById('displayResult').textContent = "Correct" + userInput; // Display the result
-	}
+  document.body.classList.add('noscroll');
+  // Function to get and display the input text
+  function showInput() {
+      var userInput = document.getElementById('userInput').value; // Get the value from the input box
+      document.getElementById('displayResult').textContent = "Correct" + userInput; // Display the result
+  }
 </script>
 </html>
