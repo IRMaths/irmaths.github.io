@@ -1,126 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Math Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      line-height: 1.6;
-    }
-    h1 {
-      text-align: center;
-    }
-    .quiz-container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      background: #f9f9f9;
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    .question label {
-      display: block;
-      margin-bottom: 8px;
-    }
-    .question input {
-      width: 100px;
-      padding: 5px;
-      font-size: 16px;
-    }
-    .feedback {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    .correct {
-      color: green;
-    }
-    .incorrect {
-      color: red;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 16px;
-      color: #fff;
-      background: #007bff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .btn:hover {
-      background: #0056b3;
-    }
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      text-align: center;
-      font-weight: bold;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth and Decay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9BAEB5;
+            color: #002d4d;
+            padding: 20px;
+        }
+        h1 {
+            color: #002d4d;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .formula {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .textbox {
+            width: 150px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-
-  <h1>Math Quiz</h1>
-    <div class="quiz-container">
-      <form id="quiz-form">
-        <!-- Question 1 -->
-        <div class="question">
-          <label for="q1">A mountain has an elevation of 7327 m above sea level. <br>
-                          What is the atmospheric pressure at the top of the mountain to the nearest pascal?  
-          </label>
-          <input type="text" id="q1" data-answer="38577" />
-          <div class="feedback" id="feedback-q1"></div>
-        </div>
-
-        <!-- Question 2 -->
-        <div class="question">
-          <label for="q2">An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa. <br>
-                          What is the altitude of the aircraft to the nearest meter?
-          </label>
-          <input type="text" id="q2" data-answer="3588" />
-          <div class="feedback" id="feedback-q2"></div>
-        </div>
-
-        <button type="button" class="btn" id="check-answers">Check Answers</button>
-      </form>
-
-      <div class="result" id="result"></div>
-    </div>
-
-  <script>
-    document.getElementById("check-answers").addEventListener("click", function () {
-      let correctCount = 0;
-      const totalQuestions = 2;
-
-      // Loop through each question
-      for (let i = 1; i <= totalQuestions; i++) {
-        const input = document.getElementById(`q${i}`);
-        const feedback = document.getElementById(`feedback-q${i}`);
-        const userAnswer = input.value.trim();
-        const correctAnswer = input.getAttribute("data-answer");
-
-        // Check if the user's answer is correct
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "Correct!";
-          feedback.className = "feedback correct";
-          correctCount++;
-        } else {
-          feedback.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
-          feedback.className = "feedback incorrect";
-        }
-      }
-
-      // Display overall result
-      const result = document.getElementById("result");
-      result.textContent = `You got ${correctCount} out of ${totalQuestions} correct!`;
-    });
-  </script>
-
+    <h1>Growth and Decay</h1>
+    <p>A mountain has an elevation of 7327 m above sea level.</p>
+    <p>
+        What is the atmospheric pressure at the top of the mountain to the nearest pascal?
+    </p>
+    <p class="formula">P = 100000e<sup>-0.00013h</sup></p>
+    <p>
+        Atmospheric pressure =
+        <input type="text" class="textbox" placeholder="Enter value" /> Pa
+    </p>
+    <p>
+        An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa.
+    </p>
+    <p>
+        What is the altitude of the aircraft to the nearest meter?
+    </p>
+    <p>
+        Altitude =
+        <input type="text" class="textbox" placeholder="Enter value" /> m
+    </p>
 </body>
 </html>
