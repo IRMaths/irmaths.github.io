@@ -5,28 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth and Decay</title>
     <style>
-        h1 { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 30px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5667px; }
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: black;
-        }
-
-        h1 {
-            color: #002d4d;
+            height: 100vh;
+            margin: 0;
+            background-color: #9BAEB5; /* Updated background color */
         }
 
         .aspect-ratio-box {
-            width: 80%; /* Adjust width as needed */
+            width: 80%;
+            max-width: 1200px;
             position: relative;
-            background-color: #9BAEB5; /* Example background color */
         }
 
         .aspect-ratio-box::before {
             content: '';
             display: block;
-            padding-top: 56.25%; /* 16:9 aspect ratio (9 / 16 * 100) */
+            padding-top: 56.25%; /* 16:9 aspect ratio */
         }
 
         .aspect-ratio-content {
@@ -36,15 +33,27 @@
             right: 0;
             bottom: 0;
             display: flex;
-            justify-content: center;
-            background-color: #9BAFB5;
-            color: white;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: #002d4d;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
             text-align: center;
         }
-        p {
-            margin: 15px 0;
-            font-size: 20px;
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
+
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
         .textbox {
             width: 150px;
             padding: 5px;
@@ -52,11 +61,31 @@
             border: 2px solid #ccc;
             border-radius: 5px;
         }
-        #formula {
-            position: absolute;
-            top: 10vh;
-            right: 10vw;
-            width: 20vw;
+
+        img {
+            margin: 20px 0;
+            width: 200px;
+        }
+
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #002d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #004067;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -64,17 +93,43 @@
     <div class="aspect-ratio-box">
         <div class="aspect-ratio-content">
             <h1>Growth and Decay</h1>
-            <div style="width:60vw;">
+            <div class="content">
                 <p>A mountain has an elevation of 7327 m above sea level.</p>
                 <p style="color:#002d4d;">What is the atmospheric pressure at the top of the mountain to the nearest pascal?</p>
-                <p>Atmospheric pressure =<input type="text" class="textbox" placeholder="Enter value" /> Pa</p>
-                <br style="height: 20vh;">
+                <img src="formula1.png" alt="Formula for pressure">
+                <p>Atmospheric pressure = <input type="text" id="pressure-input" class="textbox" placeholder="Enter value" /> Pa</p>
                 <p>An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa.</p>
                 <p style="color:#002d4d;">What is the altitude of the aircraft to the nearest meter?</p>
-                <p>Altitude =<input type="text" class="textbox" placeholder="Enter value" /> m</p>
+                <p>Altitude = <input type="text" id="altitude-input" class="textbox" placeholder="Enter value" /> m</p>
+                <button class="submit-button" onclick="checkAnswers()">Submit</button>
+                <div id="feedback" class="feedback"></div>
             </div>
-            <img src="formula1.png" id="formula">
         </div>
     </div>
+
+    <script>
+        function checkAnswers() {
+            const pressureInput = document.getElementById('pressure-input').value;
+            const altitudeInput = document.getElementById('altitude-input').value;
+
+            // Correct answers
+            const correctPressure = 40996; // Correct pressure at 7327 m
+            const correctAltitude = 9769; // Correct altitude for 62722 Pa
+
+            let feedback = '';
+
+            if (pressureInput == correctPressure && altitudeInput == correctAltitude) {
+                feedback = 'Correct! Great job!';
+            } else if (pressureInput != correctPressure && altitudeInput != correctAltitude) {
+                feedback = 'Both answers are incorrect. Please try again.';
+            } else if (pressureInput != correctPressure) {
+                feedback = 'The atmospheric pressure answer is incorrect.';
+            } else if (altitudeInput != correctAltitude) {
+                feedback = 'The altitude answer is incorrect.';
+            }
+
+            document.getElementById('feedback').textContent = feedback;
+        }
+    </script>
 </body>
 </html>
