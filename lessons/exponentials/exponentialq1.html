@@ -5,19 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth and Decay</title>
     <style>
-        h1 { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 30px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 26.4px; } h3 { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 20px; } blockquote { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Gill Sans, Gill Sans MT, Calibri, sans-serif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5667px; }
-        body {
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: black;
+        }
+
+        .aspect-ratio-box {
+            color: #9BAEB5;
+            height: 100vh;
+        }
+
+        .aspect-ratio-content {
+            margin: 0 auto;
+            aspect-ratio: 1.74;
+            height: 100vh;
+            position: relative;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
             background-color: #9BAEB5;
-            color: white;
-            padding: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
         }
+
         h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section {
+            display: flex;
+            justify-content: space-between;
+            gap: 2%;
+        }
+
+        .box {
+            width: 48%;
+            background-color: #ffffff;
             color: #002d4d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         p {
-            margin: 15px 0;
             font-size: 20px;
+            line-height: 1.5;
+            margin: 10px 0;
         }
+
         .textbox {
             width: 150px;
             padding: 5px;
@@ -25,25 +65,117 @@
             border: 2px solid #ccc;
             border-radius: 5px;
         }
-        #formula {
-            position: absolute;
-            top: 10vh;
-            right: 10vw;
-            width: 20vw;
+
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #002d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #004067;
         }
     </style>
 </head>
 <body>
-    <h1>Growth and Decay</h1>
-    <div style="width:60vw;">
-        <p>A mountain has an elevation of 7327 m above sea level.</p>
-        <p style="color:#002d4d;">What is the atmospheric pressure at the top of the mountain to the nearest pascal?</p>
-        <p>Atmospheric pressure =<input type="text" class="textbox" placeholder="Enter value" /> Pa</p>
-        <br style="height: 20vh;">
-        <p>An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa.</p>
-        <p style="color:#002d4d;">What is the altitude of the aircraft to the nearest meter?</p>
-        <p>Altitude =<input type="text" class="textbox" placeholder="Enter value" /> m</p>
+    <div class="aspect-ratio-box">
+        <div class="aspect-ratio-content">
+            <h1>Growth and Decay</h1>
+            <div class="section">
+                <div class="box">
+                    <p>Alan invested £3000.</p>
+                    <p>After <em>t</em> years, his investment is worth:</p>
+                    <p style="font-style: italic;">M = 3000e<sup>0.06t</sup></p>
+                    <p>How much is his investment worth (nearest £) after:</p>
+                    <p>
+                        1 year: 
+                        <input type="text" id="investment-1yr" class="textbox" placeholder="Enter value" /> £
+                    </p>
+                    <p>
+                        10 years: 
+                        <input type="text" id="investment-10yr" class="textbox" placeholder="Enter value" /> £
+                    </p>
+                    <p>
+                        It takes 
+                        <input type="text" id="investment-double-yrs" class="textbox" placeholder="Years" /> years and 
+                        <input type="text" id="investment-double-mths" class="textbox" placeholder="Months" /> months
+                        for his investment to double in value (rounded to the nearest month).
+                    </p>
+                </div>
+                <div class="box">
+                    <p>The value of a car is depreciating.</p>
+                    <p>After <em>t</em> years, it is worth:</p>
+                    <p style="font-style: italic;">V = 7000e<sup>-0.1t</sup></p>
+                    <p>How much was it worth (nearest £):</p>
+                    <p>
+                        Initially: 
+                        <input type="text" id="car-initial" class="textbox" placeholder="Enter value" /> £
+                    </p>
+                    <p>
+                        5 years later: 
+                        <input type="text" id="car-5yr" class="textbox" placeholder="Enter value" /> £
+                    </p>
+                    <p>
+                        It takes 
+                        <input type="text" id="car-half-yrs" class="textbox" placeholder="Years" /> years and 
+                        <input type="text" id="car-half-mths" class="textbox" placeholder="Months" /> months
+                        for the car's value to be halved (rounded to the nearest month).
+                    </p>
+                </div>
+            </div>
+            <button class="submit-button" onclick="checkAnswers()">Submit</button>
+        </div>
     </div>
-    <img src="formula1.png" id="formula">
+
+    <script>
+        function checkAnswers() {
+            // Investment growth
+            const investment1Yr = document.getElementById('investment-1yr').value;
+            const investment10Yr = document.getElementById('investment-10yr').value;
+            const investmentDoubleYrs = document.getElementById('investment-double-yrs').value;
+            const investmentDoubleMths = document.getElementById('investment-double-mths').value;
+
+            // Car depreciation
+            const carInitial = document.getElementById('car-initial').value;
+            const car5Yr = document.getElementById('car-5yr').value;
+            const carHalfYrs = document.getElementById('car-half-yrs').value;
+            const carHalfMths = document.getElementById('car-half-mths').value;
+
+            // Correct answers (you can update these as per the actual calculations)
+            const correctInvestment1Yr = 3185;
+            const correctInvestment10Yr = 5417;
+            const correctInvestmentDoubleYrs = 11;
+            const correctInvestmentDoubleMths = 7;
+
+            const correctCarInitial = 7000;
+            const correctCar5Yr = 4261;
+            const correctCarHalfYrs = 6;
+            const correctCarHalfMths = 11;
+
+            let feedback = '';
+
+            if (
+                investment1Yr == correctInvestment1Yr &&
+                investment10Yr == correctInvestment10Yr &&
+                investmentDoubleYrs == correctInvestmentDoubleYrs &&
+                investmentDoubleMths == correctInvestmentDoubleMths &&
+                carInitial == correctCarInitial &&
+                car5Yr == correctCar5Yr &&
+                carHalfYrs == correctCarHalfYrs &&
+                carHalfMths == correctCarHalfMths
+            ) {
+                feedback = 'Correct! Great job!';
+            } else {
+                feedback = 'Some answers are incorrect. Please try again.';
+            }
+
+            alert(feedback);
+        }
+    </script>
 </body>
 </html>
