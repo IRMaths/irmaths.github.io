@@ -3,109 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Math Lessons</title>
+  <title>Lessons List IRMaths</title>
   <style>
-    /* General Styling */
+    /* General Page Styling */
     body {
-      font-family: 'Roboto', Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f4f4f9;
       color: #333;
     }
 
-    /* Centered Container */
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    /* Header */
+    /* Header Styling */
     h1 {
-      font-size: 2.8rem;
-      color: #222;
-      margin-bottom: 20px;
-      font-weight: 700;
+      text-align: center;
+      padding: 20px 0;
+      margin: 0;
+      background: #007bff;
+      color: white;
+      font-size: 2em;
     }
 
-    p {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 30px;
+    /* Lesson List Container */
+    .lesson-container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    /* Lesson List */
+    /* Individual Lesson List Styling */
     .lesson-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      list-style: none;
       padding: 0;
       margin: 0;
-      list-style: none;
     }
 
-    /* Individual Lesson Links */
-    .lesson-item a {
-      display: block;
+    .lesson-list li {
+      margin: 15px 0;
+      padding: 10px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .lesson-list li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .lesson-list a {
       text-decoration: none;
-      background-color: #007bff;
-      color: #fff;
-      padding: 15px 20px;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 500;
-      transition: all 0.3s ease-in-out;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .lesson-item a:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Footer */
-    footer {
-      margin-top: 30px;
-      font-size: 0.9rem;
-      color: #999;
-    }
-
-    footer a {
       color: #007bff;
-      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .lesson-list a:hover {
+      color: #0056b3;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .lesson-list a {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Math Lessons</h1>
-    <p>Explore our carefully curated math lessons. Click on a topic below to get started!</p>
+
+  <h1>IRMaths</h1>
+  <div class="lesson-container">
     <ul class="lesson-list">
-      <li class="lesson-item"><a href="https://example.com/algebra-basics" target="_blank">Algebra Basics</a></li>
-      <li class="lesson-item"><a href="https://example.com/linear-equations" target="_blank">Linear Equations</a></li>
-      <li class="lesson-item"><a href="https://example.com/quadratic-equations" target="_blank">Quadratic Equations</a></li>
-      <li class="lesson-item"><a href="https://example.com/geometry-introduction" target="_blank">Introduction to Geometry</a></li>
-      <li class="lesson-item"><a href="https://example.com/trigonometry" target="_blank">Trigonometry</a></li>
-      <li class="lesson-item"><a href="https://example.com/probability" target="_blank">Probability</a></li>
-      <li class="lesson-item"><a href="https://example.com/statistics" target="_blank">Statistics</a></li>
-      <li class="lesson-item"><a href="https://example.com/calculus-basics" target="_blank">Calculus Basics</a></li>
-      <li class="lesson-item"><a href="https://example.com/matrices" target="_blank">Matrices</a></li>
-      <li class="lesson-item"><a href="https://example.com/number-theory" target="_blank">Number Theory</a></li>
+      <li><a href="exponentials/exponential.html" target="_blank">Exponential Growth and Decay</a></li>
+      <li><a href="algebra_basics/algebra_basics.html" target="_blank">Algebra Basics</a></li>
+      <li><a href="geometry_shapes/geometry_shapes.html" target="_blank">Understanding Geometry and Shapes</a></li>
+      <li><a href="linear_equations/linear_equations.html" target="_blank">Linear Equations</a></li>
+      <li><a href="probability/probability.html" target="_blank">Introduction to Probability</a></li>
+      <li><a href="statistics/statistics.html" target="_blank">Statistics Fundamentals</a></li>
+      <li><a href="percentages/percentages.html" target="_blank">Working with Percentages</a></li>
+      <li><a href="quadratic_equations/quadratic_equations.html" target="_blank">Quadratic Equations</a></li>
+      <li><a href="trigonometry_basics/trigonometry_basics.html" target="_blank">Trigonometry Basics</a></li>
     </ul>
   </div>
-  <footer>
-    © 2024 Math Academy | <a href="https://example.com/contact" target="_blank">Contact Us</a>
-  </footer>
+
 </body>
 </html>
