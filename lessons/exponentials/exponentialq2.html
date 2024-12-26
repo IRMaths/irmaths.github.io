@@ -6,47 +6,44 @@
     <title>Growth and Decay</title>
     <style>
         body, html {
-          margin: 0;
-          padding: 0;
-          overflow: hidden; /* Prevent scrollbars */
-          background-color: black;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #9BAEB5;
         }
 
         .aspect-ratio-box {
-            color: #9BAEB5;
+            color: #002d4d;
             height: 100vh;
-            align: center;
-        }
-
-        .aspect-ratio-box::before {
-            content: '';
-            display: block;
-            align: center;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
         }
 
         .aspect-ratio-content {
             margin: 0 auto;
             aspect-ratio: 1.74;
             height: 100vh;
-            position: absolute;
-            top: 0%;
-            left: 0%;
-            right: 0%;
-            bottom: 0%;
-            padding-left: 2%;
+            position: relative;
+            padding: 2%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            color: white;
+            background-color: #9BAEB5;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
         }
 
         h1 {
             font-size: 36px;
             font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .box {
+            width: 100%;
+            background-color: #ffffff;
+            color: #002d4d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         p {
@@ -63,16 +60,11 @@
             border-radius: 5px;
         }
 
-        img {
-            margin: 20px 0;
-            width: 200px;
-        }
-
         .submit-button {
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 18px;
-            background-color: #002d4d;
+            background-color: #004067;
             color: white;
             border: none;
             border-radius: 5px;
@@ -80,61 +72,49 @@
         }
 
         .submit-button:hover {
-            background-color: #004067;
-        }
-
-        .feedback {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        #formula {
-            position: absolute;
-            top: 10vh;
-            right: 10vw;
-            width: 20vw;
+            background-color: #006080;
         }
     </style>
 </head>
 <body>
     <div class="aspect-ratio-box">
-        <div class="aspect-ratio-content" style="background-color: #9BAFB5;">
-            <img src="formula1.png" alt="Formula for pressure" id="formula">
+        <div class="aspect-ratio-content">
             <h1>Growth and Decay</h1>
-            <div class="content">
+            <div class="box">
                 <p>A mountain has an elevation of 7327 m above sea level.</p>
-                <p style="color:#002d4d;">What is the atmospheric pressure at the top of the mountain to the nearest pascal?</p>
-                <p>Atmospheric pressure = <input type="text" id="pressure-input" class="textbox" placeholder="Enter value" /> Pa</p>
-                <br style="height: 20vh;">
+                <p>What is the atmospheric pressure at the top of the mountain to the nearest pascal?</p>
+                <p style="font-style: italic;">P = 100000e<sup>-0.00013h</sup></p>
+                <p>
+                    Atmospheric pressure = 
+                    <input type="text" id="mountain-pressure" class="textbox" placeholder="Enter value" /> Pa
+                </p>
                 <p>An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa.</p>
-                <p style="color:#002d4d;">What is the altitude of the aircraft to the nearest meter?</p>
-                <p>Altitude = <input type="text" id="altitude-input" class="textbox" placeholder="Enter value" /> m</p>
-                <button class="submit-button" onclick="checkAnswers()">Submit</button>
-                <div id="feedback" class="feedback"></div>
+                <p>What is the altitude of the aircraft to the nearest meter?</p>
+                <p>
+                    Altitude = 
+                    <input type="text" id="aircraft-altitude" class="textbox" placeholder="Enter value" /> m
+                </p>
             </div>
+            <button class="submit-button" onclick="checkAnswers()">Submit</button>
         </div>
     </div>
 
     <script>
         function checkAnswers() {
-            const pressureInput = document.getElementById('pressure-input').value;
-            const altitudeInput = document.getElementById('altitude-input').value;
+            // Inputs
+            const mountainPressure = document.getElementById('mountain-pressure').value;
+            const aircraftAltitude = document.getElementById('aircraft-altitude').value;
 
-            // Correct answers
-            const correctPressure = 40996; // Correct pressure at 7327 m
-            const correctAltitude = 9769; // Correct altitude for 62722 Pa
+            // Correct answers (replace with calculated values)
+            const correctMountainPressure = 40744; // Example value (calculate accordingly)
+            const correctAircraftAltitude = 3500; // Example value (calculate accordingly)
 
             let feedback = '';
 
-            if (pressureInput == correctPressure && altitudeInput == correctAltitude) {
+            if (mountainPressure == correctMountainPressure && aircraftAltitude == correctAircraftAltitude) {
                 feedback = 'Correct! Great job!';
-            } else if (pressureInput != correctPressure && altitudeInput != correctAltitude) {
-                feedback = 'Both answers are incorrect. Please try again.';
-            } else if (pressureInput != correctPressure) {
-                feedback = 'The atmospheric pressure answer is incorrect.';
-            } else if (altitudeInput != correctAltitude) {
-                feedback = 'The altitude answer is incorrect.';
+            } else {
+                feedback = 'Some answers are incorrect. Please try again.';
             }
 
             alert(feedback);
