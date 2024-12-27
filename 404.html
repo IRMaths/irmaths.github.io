@@ -10,100 +10,80 @@
       margin: 0;
       font-family: 'Arial', sans-serif;
       font-size: 16px;
-      background-color: #f9f9f9;
+      background-color: #f3f4f6;
       color: #1a1a1a;
       line-height: 1.5;
     }
 
-    /* Navigation Bar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .navbar .logo {
-      display: flex;
-      align-items: center;
-    }
-    .navbar .logo img {
-      width: 40px;
-      margin-right: 10px;
-    }
-    .navbar .links {
-      display: flex;
-      gap: 30px;
-    }
-    .navbar .links a {
-      text-decoration: none;
-      color: #1a1a1a;
-      font-weight: bold;
-      font-size: 1rem;
-    }
-    .navbar .login-btn {
-      padding: 8px 16px;
-      border: 2px solid #1a1a1a;
-      border-radius: 20px;
-      text-decoration: none;
-      color: #1a1a1a;
-      font-weight: bold;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    .navbar .login-btn:hover {
-      background-color: #1a1a1a;
-      color: #ffffff;
-    }
-
     /* 404 Page Content */
     .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
-      padding: 50px 20px;
+      padding: 0 20px;
     }
     .container img {
-      width: 150px;
-      margin-bottom: 30px;
+      width: 200px;
+      margin-bottom: 20px;
     }
     .container h1 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: bold;
       color: #1a1a1a;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
     .container p {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #555;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     .container a {
-      color: #007bff;
       text-decoration: none;
       font-weight: bold;
+      font-size: 1rem;
+      color: #ffffff;
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s, transform 0.2s;
     }
     .container a:hover {
-      text-decoration: underline;
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <div class="navbar">
-    <div class="logo">
-      <span>IRMaths</span>
-    </div>
   <!-- 404 Content -->
   <div class="container">
-    <h1>We are sorry, this page doesn't exist (404)</h1>
-    <p>You will be redirected soon. If not click <a href="https://irmaths.github.io">here</a>.</p>
-    <p>
-    </p>
+    <img src="https://via.placeholder.com/200?text=404" alt="404 Error">
+    <h1>Oops! Page Not Found</h1>
+    <p>The page you are looking for doesn't exist or has been moved.</p>
+    <a href="https://irmaths.github.io">Go Back to Home</a>
   </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>© 2024 IRMaths. All rights reserved.</p>
+  </div>
+
+  <!-- Automatic Redirect -->
+  <script>
+    // Automatically redirect after 5 seconds
+    setTimeout(function() {
+      window.location.href = "https://irmaths.github.io";
+    }, 5000);
+  </script>
 </body>
-<script>
-   // Automatically redirect after 5 seconds
-   setTimeout(function(){
-       window.location.href = "https://irmaths.github.io"; 
-   }, 5000);
-</script>
 </html>
