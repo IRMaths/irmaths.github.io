@@ -1,2 +1,0 @@
-- name: Cleanup old build
-  run: rm -rf _site
