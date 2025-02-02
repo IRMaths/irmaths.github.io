@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth and Decay</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #9BAEB5;
+        }
+
+        .aspect-ratio-box {
+            color: #002d4d;
+        }
+
+        .aspect-ratio-content {
+            margin: 0 auto;
+            aspect-ratio: 1.74;
+            position: relative;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: #9BAEB5;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .box {
+            width: 97%;
+            background-color: #ffffff;
+            color: #002d4d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        .textbox {
+            width: 150px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #004067;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #006080;
+        }
+
+        .feedback-icon {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="aspect-ratio-box">
+        <div class="aspect-ratio-content">
+            <h1>Growth and Decay Q2</h1>
+            <div class="box">
+                <p style="font-style: italic;" >Use P = 100000e<sup>-0.00013h</sup> .</p>
+                <p>A mountain has an elevation of 7327 m above sea level.</p>
+                <p>What is the atmospheric pressure at the top of the mountain to the nearest pascal?</p>
+                <p>
+                    Atmospheric pressure = 
+                    <input type="text" id="mountain-pressure" class="textbox" placeholder="Enter value" />
+                    <span id="feedback-mountain-pressure" class="feedback-icon"></span>
+                </p>
+                <p>An aircraft has a cruising altitude that has an atmospheric pressure of 62722 Pa.</p>
+                <p>What is the altitude of the aircraft to the nearest meter?</p>
+                <p>
+                    Altitude = 
+                    <input type="text" id="aircraft-altitude" class="textbox" placeholder="Enter value" />
+                    <span id="feedback-aircraft-altitude" class="feedback-icon"></span>
+                </p>
+            </div>
+            <button class="submit-button" onclick="checkAnswers()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Correct answers
+            const correctAnswers = {
+                'mountain-pressure': 38577,
+                'aircraft-altitude': 3588,
+            };
+
+            let allCorrect = true;
+
+            // Validate each answer
+            for (const [id, correctValue] of Object.entries(correctAnswers)) {
+                const inputElement = document.getElementById(id);
+                const feedbackElement = document.getElementById(`feedback-${id}`);
+                const userValue = parseInt(inputElement.value);
+
+                if (userValue === correctValue) {
+                    feedbackElement.textContent = '✔';
+                    feedbackElement.classList.add('correct');
+                    feedbackElement.classList.remove('incorrect');
+                    inputElement.setAttribute('readonly', true);
+                } else {
+                    feedbackElement.textContent = '✘';
+                    feedbackElement.classList.add('incorrect');
+                    feedbackElement.classList.remove('correct');
+                    allCorrect = false;
+                }
+            }
+
+            if (allCorrect) {
+                alert('Correct! You may close this tab now.');
+            } else {
+                alert('Some answers are incorrect. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>

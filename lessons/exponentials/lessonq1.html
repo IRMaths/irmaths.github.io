@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth and Decay</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrollbars */
+            background-color: #9BAEB5;
+        }
+
+        .aspect-ratio-box {
+            color: #002d4d;
+        }
+
+        .aspect-ratio-content {
+            margin: 0 auto;
+            aspect-ratio: 1.74;
+            position: relative;
+            padding: 2%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            background-color: #9BAEB5;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, sans-serif;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section {
+            display: flex;
+            justify-content: space-between;
+            gap: 2%;
+        }
+
+        .box {
+            width: 48%;
+            background-color: #ffffff;
+            color: #002d4d;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 10px 0;
+        }
+
+        .textbox {
+            width: 150px;
+            padding: 5px;
+            margin-left: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #002d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-button:hover {
+            background-color: #004067;
+        }
+
+        .feedback-icon {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="aspect-ratio-box">
+        <div class="aspect-ratio-content">
+            <h1>Growth and Decay Q1</h1>
+            <div class="section">
+                <div class="box">
+                    <p>Alan invested £3000.</p>
+                    <p>After <em>t</em> years, his investment is worth:</p>
+                    <p style="font-style: italic;">M = 3000e<sup>0.06t</sup></p>
+                    <p>How much is his investment worth (nearest £) after:</p>
+                    <p>
+                        1 year: £
+                        <input type="text" id="investment-1yr" class="textbox" placeholder="Enter value" />
+                        <span id="feedback-investment-1yr" class="feedback-icon"></span>
+                    </p>
+                    <p>
+                        10 years: £
+                        <input type="text" id="investment-10yr" class="textbox" placeholder="Enter value" />
+                        <span id="feedback-investment-10yr" class="feedback-icon"></span>
+                    </p>
+                    <p>
+                        It takes 
+                        <input type="text" id="investment-double-yrs" class="textbox" placeholder="Years" />
+                        <span id="feedback-investment-double-yrs" class="feedback-icon"></span> years and 
+                        <input type="text" id="investment-double-mths" class="textbox" placeholder="Months" />
+                        <span id="feedback-investment-double-mths" class="feedback-icon"></span> months
+                        for his investment to double in value (rounded to the nearest month).
+                    </p>
+                </div>
+                <div class="box">
+                    <p>The value of a car is depreciating.</p>
+                    <p>After <em>t</em> years, it is worth:</p>
+                    <p style="font-style: italic;">V = 7000e<sup>-0.1t</sup></p>
+                    <p>How much was it worth (nearest £):</p>
+                    <p>
+                        Initially: £
+                        <input type="text" id="car-initial" class="textbox" placeholder="Enter value" />
+                        <span id="feedback-car-initial" class="feedback-icon"></span>
+                    </p>
+                    <p>
+                        5 years later: £
+                        <input type="text" id="car-5yr" class="textbox" placeholder="Enter value" />
+                        <span id="feedback-car-5yr" class="feedback-icon"></span>
+                    </p>
+                    <p>
+                        It takes 
+                        <input type="text" id="car-half-yrs" class="textbox" placeholder="Years" />
+                        <span id="feedback-car-half-yrs" class="feedback-icon"></span> years and 
+                        <input type="text" id="car-half-mths" class="textbox" placeholder="Months" />
+                        <span id="feedback-car-half-mths" class="feedback-icon"></span> months
+                        for the car's value to be halved (rounded to the nearest month).
+                    </p>
+                </div>
+            </div>
+            <button class="submit-button" onclick="checkAnswers()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Correct answers
+            const correctAnswers = {
+                'investment-1yr': 3186,
+                'investment-10yr': 5466,
+                'investment-double-yrs': 11,
+                'investment-double-mths': 7,
+                'car-initial': 7000,
+                'car-5yr': 4246,
+                'car-half-yrs': 6,
+                'car-half-mths': 11,
+            };
+
+            let allCorrect = true;
+
+            // Validate each answer
+            for (const [id, correctValue] of Object.entries(correctAnswers)) {
+                const inputElement = document.getElementById(id);
+                const feedbackElement = document.getElementById(`feedback-${id}`);
+                const userValue = parseInt(inputElement.value);
+
+                if (userValue === correctValue) {
+                    feedbackElement.textContent = '✔';
+                    feedbackElement.classList.add('correct');
+                    feedbackElement.classList.remove('incorrect');
+                    inputElement.setAttribute('readonly', true);
+                } else {
+                    feedbackElement.textContent = '✘';
+                    feedbackElement.classList.add('incorrect');
+                    feedbackElement.classList.remove('correct');
+                    allCorrect = false;
+                }
+            }
+
+            if (allCorrect) {
+                alert('Correct! You may close this tab now.');
+            } else {
+                alert('Some answers are incorrect. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
