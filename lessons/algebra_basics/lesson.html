@@ -7,6 +7,8 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
 
   <style id="compiled-css" type="text/css">
     /* Basic Reset */
@@ -159,20 +161,21 @@
 </head>
 <body>
     <title>Polynomial practice</title>
-    <li style="display: none;">Random seed: (1–4294967295) <input id="test_id"></li>
+    <li style="display: none;"><input id="test_id"></li>
+    <span id="mathquill-display"></span>
 
     <div id="prototype" style="display:none;">
       <p class="problem">
-        <span class="question">question</span> =
+        <span class="question">Question</span> =
         <input class="answer" value="answer" autocapitalize="off">
-        <span class="feedback">feedback</span>
+        <span class="feedback" style="display: none;">feedback</span>
       </p>
     </div>
     <form id="problems_form">
       <div id="problems"><p class="problem">
-        <span class="question">(x² – 8)(–x² – 1)</span> =
+        <span class="question"></span>
         <input class="answer" value="answer" autocapitalize="off">
-        <span class="feedback"></span>
+        <span class="feedback" id="feedback" style="display: none;"></span>
       </p></div>
       <input type="submit" value="Submit" style="display:none;">
     </form>
@@ -180,6 +183,8 @@
     <script type="text/javascript">
 
 
+
+//Generate Random Number 
 const random = (()=>{
   const f = () => {
     // https://en.wikipedia.org/wiki/Xorshift
@@ -404,13 +409,13 @@ function build_feedback(expected, got, got_standard_form) {
         if (got_standard_form) {
           return ['✅'];
         }
-        return ['⚠', 'standard form: ' + polynomial_to_string(expected)];
+        return ['✅'];
       }
-      return ['❌', 'enter ? for the answer'];
+      return ['❌'];
     }
-    return ['…'];
+    return ['Please enter an answer.'];
   }
-  return ['💀', 'oops, internal error'];
+  return ['Server error.'];
 }
 
 function get_right_answer(problem_elt) {
@@ -472,7 +477,8 @@ function check_answer(answer_elt) {
   const [got, got_standard_form, canonical] = parse_polynomial(answer_elt.value);
   answer_elt.value = canonical || answer_elt.value;
   const expected = get_right_answer(problem_elt);
-  give_feedback(problem_elt, ...build_feedback(expected, got, got_standard_form));
+  give_feedback(problem_elt, build_feedback(expected, got, got_standard_form));
+  document.querySelectorAll(".feedback").forEach(el => el.style.display = "block");
   return got_standard_form && polynomials_equal(got, expected);
 }
 
