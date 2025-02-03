@@ -159,17 +159,8 @@
 </head>
 <body>
     <title>Polynomial practice</title>
-  
-    <ul>
-      <li>Enter the product in <a href="https://www.cuemath.com/algebra/standard-form-polynomial/">standard form</a>.</li>
-      <li>Use <code>a</code> for ax⁰; use <code>x</code> for x¹; use <code>xⁿ</code> for 1xⁿ.</li>
-      <li>Numbers typed after the variable are formatted as exponents.</li>
-      <li><code>m</code> and <code>-</code> are formatted as minus sign.</li>
-      <li><code>p</code> and <code>+</code> are formatted as plus sign.</li>
-      <li>Press <code>Enter</code>, <code>return</code>, <code>Go</code>, or <code>Next</code> when done.</li>
-      <li>Enter <code>?</code> to see the answer.</li>
-      <li>Random seed: (1–4294967295) <input id="test_id"></li>
-    </ul>
+    <li style="display: none;">Random seed: (1–4294967295) <input id="test_id"></li>
+
     <div id="prototype" style="display:none;">
       <p class="problem">
         <span class="question">question</span> =
@@ -181,20 +172,18 @@
       <div id="problems"><p class="problem">
         <span class="question">(x² – 8)(–x² – 1)</span> =
         <input class="answer" value="answer" autocapitalize="off">
-        <span class="feedback">…</span>
+        <span class="feedback"></span>
       </p></div>
-      <input type="submit" value="Thanks" style="display:none;">
+      <input type="submit" value="Submit" style="display:none;">
     </form>
   
-
-
-    <script type="text/javascript">//<![CDATA[
+    <script type="text/javascript">
 
 
 const random = (()=>{
-	const f = () => {
-  	// https://en.wikipedia.org/wiki/Xorshift
-  	let x = f.state;
+  const f = () => {
+    // https://en.wikipedia.org/wiki/Xorshift
+    let x = f.state;
     x ^= x << 13;
     x ^= x >> 17;
     x ^= x << 5;
@@ -206,7 +195,7 @@ const random = (()=>{
 })();
 
 function unsuperscript(exponent) {
-	let ret = '';
+  let ret = '';
   for (let i = 0; i < exponent.length; ++i) {
     ret += '01234567890123456789'['0123456789⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(exponent[i])];
   }
@@ -214,8 +203,8 @@ function unsuperscript(exponent) {
 }
 
 function superscript(exponent) {
-	exponent = String(exponent);
-	let ret = '';
+  exponent = String(exponent);
+  let ret = '';
   for (let i = 0; i < exponent.length; ++i) {
     ret += '⁰¹²³⁴⁵⁶⁷⁸⁹⁰¹²³⁴⁵⁶⁷⁸⁹'['0123456789⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(exponent[i])];
   }
@@ -228,7 +217,7 @@ const VARIABLE = 'x';
 const SPACE = ' ';
 
 function canonicalize(prefix, fragment, state) {
-	let ret = prefix;
+  let ret = prefix;
   for (const c of fragment) {
     const ctype = ('00000000000000000000––––+++xx '[
                    '0123456789⁰¹²³⁴⁵⁶⁷⁸⁹-–mM+pPxX '.indexOf(c)]);
@@ -236,7 +225,7 @@ function canonicalize(prefix, fragment, state) {
       ret += MINUS;
       state = 'begin_term';
     } else if (ctype === undefined) {
-    	// Swallow unexpected characters.
+      // Swallow unexpected characters.
     } else if (ctype === SPACE) {
       if (state === 'operator') {
         state = 'begin_term';
@@ -272,7 +261,7 @@ function handle_answer_input(event) {
   const answer_elt = this;
   const problem_elt = answer_elt.parentElement;
   if (answer_elt.value.includes('?')) {
-  	give_feedback(problem_elt, polynomial_to_string(get_right_answer(problem_elt)));
+    give_feedback(problem_elt, polynomial_to_string(get_right_answer(problem_elt)));
     return;
   }
   const old_caret = answer_elt.selectionEnd;
@@ -289,7 +278,7 @@ function handle_answer_input(event) {
 function parse_polynomial(string) {
   const [canonical, state] = canonicalize('', string, 'begin');
   if (['begin', 'begin_term', 'operator'].includes(state)) {
-  	return [];
+    return [];
   }
   let pieces = canonical.split(/( [-–+] )/);
   let poly = [];
@@ -297,27 +286,27 @@ function parse_polynomial(string) {
   let sign = 1;
   let last_exponent;
   while (pieces.length > 0) {
-  	const piece = pieces.shift();
+    const piece = pieces.shift();
     if (piece === '') {
-    	return [];
+      return [];
     }
     const match = /^([-–]?)([0-9]*)(x([⁰¹²³⁴⁵⁶⁷⁸⁹]*))?/.exec(piece);
     if (!match) {
       return [];
     }
     if (match[1]) {
-    	sign = -1;
+      sign = -1;
     }
     if (['⁰', '¹'].includes(match[4])) {
-    	standard = false;
+      standard = false;
     }
     if (match[3] && ['1', '0'].includes(match[2])) {
-    	standard = false;
+      standard = false;
     }
     const coefficient = Number(match[2] || 1);
     const exponent = (match[3] ? Number(unsuperscript(match[4]) || 1) : 0);
     if (last_exponent !== undefined && exponent >= last_exponent) {
-    	standard = false;
+      standard = false;
     }
     last_exponent = exponent;
     poly[exponent] = (poly[exponent] || 0) + sign * coefficient;
@@ -331,21 +320,21 @@ function parse_polynomial(string) {
 }
 
 function multiply_polynomials(left, right) {
-	const ret = [];
+  const ret = [];
   for (let i = 0; i < left.length; ++i) {
-  	for (let j = 0; j < right.length; ++j) {
-    	ret[i+j] = (ret[i+j] || 0) + (left[i] || 0) * (right[j] || 0);
+    for (let j = 0; j < right.length; ++j) {
+      ret[i+j] = (ret[i+j] || 0) + (left[i] || 0) * (right[j] || 0);
     }
   }
   return ret;
 }
 
 function parse_polynomial_expression(string) {
-	let ret = [1];
+  let ret = [1];
   for (const match of string.matchAll(/\((.+?)\)|([-–]?[^-()+–]+)/g)) {
-  	const [poly] = parse_polynomial(match[1] || match[2]);
+    const [poly] = parse_polynomial(match[1] || match[2]);
     if (!poly) {
-    	return;
+      return;
     }
     ret = multiply_polynomials(ret, poly);
   }
@@ -353,11 +342,11 @@ function parse_polynomial_expression(string) {
 }
 
 function polynomials_equal(left, right) {
-	const len = left.length;
+  const len = left.length;
   if (len === right.length) {
-  	for (let i = 0; i < len; ++i) {
-    	if ((left[i] || 0) !== (right[i] || 0)) {
-      	return false;
+    for (let i = 0; i < len; ++i) {
+      if ((left[i] || 0) !== (right[i] || 0)) {
+        return false;
       }
     }
     return true;
@@ -366,30 +355,30 @@ function polynomials_equal(left, right) {
 }
 
 function polynomial_to_string(poly) {
-	if (poly.length === 0) {
-	  return '0';
+  if (poly.length === 0) {
+    return '0';
   }
   const pieces = [];
   for (let i = poly.length - 1; i >= 0; --i) {
-  	const coefficient = poly[i] || 0;
-  	if (coefficient !== 0) {
-    	let piece = '';
+    const coefficient = poly[i] || 0;
+    if (coefficient !== 0) {
+      let piece = '';
       if (pieces.length === 0) {
-      	if (coefficient < 0) {
-        	piece += '–';
+        if (coefficient < 0) {
+          piece += '–';
         }
       } else if (coefficient > 0) {
-      	piece += ' + ';
+        piece += ' + ';
       } else {
-      	piece += ' – ';
+        piece += ' – ';
       }
       if (Math.abs(coefficient) !== 1 || i === 0) {
-      	piece += Math.abs(coefficient);
+        piece += Math.abs(coefficient);
       }
       if (i > 0) {
-      	piece += 'x';
+        piece += 'x';
         if (i > 1) {
-        	piece += superscript(i);
+          piece += superscript(i);
         }
       }
       pieces.push(piece);
@@ -399,11 +388,11 @@ function polynomial_to_string(poly) {
 }
 
 function give_feedback(problem_elt, feedback, hint) {
-	const feedback_elt = problem_elt.querySelector('.feedback');
+  const feedback_elt = problem_elt.querySelector('.feedback');
   if (hint) {
-  	feedback_elt.setAttribute('title', hint);
+    feedback_elt.setAttribute('title', hint);
   } else {
-  	feedback_elt.removeAttribute('title');
+    feedback_elt.removeAttribute('title');
   }
   feedback_elt.textContent = feedback;
 }
@@ -425,49 +414,49 @@ function build_feedback(expected, got, got_standard_form) {
 }
 
 function get_right_answer(problem_elt) {
-	return parse_polynomial_expression(problem_elt.querySelector('.question').innerText);
+  return parse_polynomial_expression(problem_elt.querySelector('.question').innerText);
 }
 
 function random_nonzero_coefficient() {
-	const sign = 2 * Math.floor(2 * random()) - 1;
+  const sign = 2 * Math.floor(2 * random()) - 1;
   const magnitude = Math.floor(Math.exp(2.4 * random()));
   return sign * magnitude;
 }
 
 function random_polynomial(allow_constant) {
   r = random();
-	if (r < 0.6) {
-  	return [random_nonzero_coefficient(), random_nonzero_coefficient()];
+  if (r < 0.6) {
+    return [random_nonzero_coefficient(), random_nonzero_coefficient()];
   }
   if (r < 0.7) {
-  	return [random_nonzero_coefficient(), 0, random_nonzero_coefficient()];
+    return [random_nonzero_coefficient(), 0, random_nonzero_coefficient()];
   }
   if (r < 0.8) {
     return [0, random_nonzero_coefficient(), random_nonzero_coefficient()];
   }
   if (r < 0.9 || !allow_constant) {
-  	return [0, random_nonzero_coefficient()];
+    return [0, random_nonzero_coefficient()];
   }
   return [random_nonzero_coefficient()];
 }
 
 function count_nonzero_terms(poly) {
-	return poly.reduce((count, val) => count + (val ? 1 : 0), 0);
+  return poly.reduce((count, val) => count + (val ? 1 : 0), 0);
 }
 
 function new_question() {
-	const p1 = random_polynomial(true);
+  const p1 = random_polynomial(true);
   const p2 = random_polynomial();
   let s1 = polynomial_to_string(p1);
   if (count_nonzero_terms(p1) > 1) {
-  	s1 = '(' + s1 + ')';
+    s1 = '(' + s1 + ')';
   }
   const s2 = '(' + polynomial_to_string(p2) + ')';
-	return s1 + s2;
+  return s1 + s2;
 }
 
 function add_problem() {
-	const problem_elt = document.querySelector('#prototype .problem').cloneNode(true);
+  const problem_elt = document.querySelector('#prototype .problem').cloneNode(true);
   problem_elt.querySelector('.question').textContent = new_question();
   const answer_elt = problem_elt.querySelector('.answer');
   answer_elt.value = '';
@@ -488,37 +477,37 @@ function check_answer(answer_elt) {
 }
 
 function handle_answer_blur() {
-	const answer_elt = this;
+  const answer_elt = this;
   check_answer(answer_elt);
 }
 
 function handle_form_submit(event) {
   event.preventDefault();
-	const focus = document.activeElement;
+  const focus = document.activeElement;
   if (focus && focus.matches('#problems .answer')) {
-  	const answer_elt = focus;
+    const answer_elt = focus;
     const problem_elt = answer_elt.parentElement;
     if (check_answer(answer_elt) && !problem_elt.nextElementSibling) {
-  	add_problem();
+    add_problem();
     }
   }
 }
 
 function get_random_seed() {
-	const test_id_elt = document.getElementById('test_id');
+  const test_id_elt = document.getElementById('test_id');
   const random_seed = (Number(test_id_elt.value) & 0xffffffff) || 1000 + Math.floor(1000 * Math.random());
   test_id_elt.value = random_seed + (random_seed < 0 ? 0x100000000 : 0);
-	return random_seed;
+  return random_seed;
 }
 
 function handle_test_id_change() {
-	random.state = get_random_seed();
+  random.state = get_random_seed();
   document.getElementById('problems').innerHTML = '';
   add_problem();
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-	document.getElementById('test_id').addEventListener('change', handle_test_id_change);
+  document.getElementById('test_id').addEventListener('change', handle_test_id_change);
   handle_test_id_change();
   document.getElementById('problems_form').addEventListener('submit', handle_form_submit);
 })
