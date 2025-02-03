@@ -462,7 +462,7 @@ function convertPolynomialToLatex(polynomial) {
     });
 
     // Handle multiplication between expressions (like (–2x² + 4)(2x))
-    latexString = latexString.replace(/\)\s*\(/g, ') \\cdot (');
+    latexString = latexString.replace(/\)\s*\(/g, ') (');
 
     return latexString;
 }
