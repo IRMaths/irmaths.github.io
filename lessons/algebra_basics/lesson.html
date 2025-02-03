@@ -7,8 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathquill/0.10.1/mathquill.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   <style id="compiled-css" type="text/css">
     /* Basic Reset */
@@ -162,18 +161,17 @@
 <body>
     <title>Polynomial practice</title>
     <li style="display: none;"><input id="test_id"></li>
-    <span id="mathquill-display"></span>
-
+    <div id="latexOutput"></div>
     <div id="prototype" style="display:none;">
       <p class="problem">
-        <span class="question">Question</span> =
+        <span class="question" style="display: none;">Question</span> 
         <input class="answer" value="answer" autocapitalize="off">
         <span class="feedback" style="display: none;">feedback</span>
       </p>
     </div>
     <form id="problems_form">
       <div id="problems"><p class="problem">
-        <span class="question"></span>
+        <span class="question" style="display: none;"></span>
         <input class="answer" value="answer" autocapitalize="off">
         <span class="feedback" id="feedback" style="display: none;"></span>
       </p></div>
@@ -181,8 +179,6 @@
     </form>
   
     <script type="text/javascript">
-
-
 
 //Generate Random Number 
 const random = (()=>{
@@ -428,6 +424,49 @@ function random_nonzero_coefficient() {
   return sign * magnitude;
 }
 
+function convertToLatex(polynomial) {
+    MathJax.Hub.Startup.onload();
+    // Convert the polynomial expression to LaTeX
+    const latexString = convertPolynomialToLatex(polynomial);
+
+    // Output the LaTeX string within the div
+    document.getElementById("latexOutput").innerHTML = '\\(' + latexString + '\\)\=';
+
+    // Trigger MathJax to render the LaTeX
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "latexOutput"]);
+}
+
+function convertPolynomialToLatex(polynomial) {
+    let latexString = polynomial;
+
+    // Handle negative and positive exponents for terms like x^2, x^3, etc.
+    latexString = latexString.replace(/x\^2/g, 'x^{2}')
+                             .replace(/x\^3/g, 'x^{3}')
+                             .replace(/x\^([4-9])/g, 'x^{\\1}');
+
+    // Handle terms like 2x, -3x (coefficients with x)
+    latexString = latexString.replace(/([+-]?\d+)x/g, (match, p1) => {
+        // Ensure proper handling of coefficients and sign
+        return `${p1}x`;
+    });
+
+    // Handle single x terms (like -x, x)
+    latexString = latexString.replace(/([+-]?)x/g, (match, p1) => {
+        // If it's just x or -x (without explicit coefficient), keep it as x or -x
+        return p1 + 'x';
+    });
+
+    // Handle constant numbers (like -8, 4, etc.)
+    latexString = latexString.replace(/([+-]?\d+)/g, (match, p1) => {
+        return p1;
+    });
+
+    // Handle multiplication between expressions (like (–2x² + 4)(2x))
+    latexString = latexString.replace(/\)\s*\(/g, ') \\cdot (');
+
+    return latexString;
+}
+
 function random_polynomial(allow_constant) {
   r = random();
   if (r < 0.6) {
@@ -462,7 +501,10 @@ function new_question() {
 
 function add_problem() {
   const problem_elt = document.querySelector('#prototype .problem').cloneNode(true);
-  problem_elt.querySelector('.question').textContent = new_question();
+  const problem_expression = new_question();
+  problem_elt.querySelector('.question').textContent = problem_expression
+  console.log(problem_expression)
+  convertToLatex(problem_expression)
   const answer_elt = problem_elt.querySelector('.answer');
   answer_elt.value = '';
   answer_elt.addEventListener('input', handle_answer_input);
