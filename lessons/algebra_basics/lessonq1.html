@@ -155,7 +155,7 @@
 </head>
 
 <body>
-    <title>Polynomial practice</title>
+    <title>Polynomial Practice</title>
     <li style="display: none;"><input id="test_id"></li>
     <div id="latexOutput"></div>
     <div id="prototype" style="display:none;">
@@ -481,18 +481,20 @@ function new_question() {
 }
 
 function add_problem() {
-  const problem_elt = document.querySelector('#prototype .problem').cloneNode(true);
-  const problem_expression = new_question();
-  problem_elt.querySelector('.question').textContent = problem_expression
-  console.log(problem_expression)
-  convertToLatex(problem_expression)
+  const problem_elt = document.querySelector('#problems .problem'); // Get the existing problem
+  if (!problem_elt) return; // Safety check in case no problems exist
+
+  const problem_expression = new_question(); // Generate new question
+  problem_elt.querySelector('.question').textContent = problem_expression; // Update question text
+  console.log(problem_expression);
+  
+  convertToLatex(problem_expression); // Render updated question in LaTeX
+
   const answer_elt = problem_elt.querySelector('.answer');
-  answer_elt.value = '';
-  answer_elt.addEventListener('input', handle_answer_input);
-  answer_elt.addEventListener('blur', handle_answer_blur);
-  give_feedback(problem_elt, '…');
-  document.getElementById('problems').appendChild(problem_elt);
-  problem_elt.querySelector('.answer').focus();
+  answer_elt.value = ''; // Clear previous answer
+  
+  give_feedback(problem_elt, ''); // Clear previous feedback
+  answer_elt.focus(); // Keep focus on the input field
 }
 
 function check_answer(answer_elt) {
