@@ -176,6 +176,21 @@
   
     <script type="text/javascript">
 
+//Generate Random Number 
+const random = (()=>{
+  const f = () => {
+    // https://en.wikipedia.org/wiki/Xorshift
+    let x = f.state;
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    f.state = x
+    return (x + 0x80000000) / 0x100000000;
+  }
+  f.state = 10000;
+  return f;
+})();
+
 function unsuperscript(exponent) {
   let ret = '';
   for (let i = 0; i < exponent.length; ++i) {
