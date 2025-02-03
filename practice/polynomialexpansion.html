@@ -161,20 +161,35 @@
     <div id="prototype" style="display:none;">
       <p class="problem">
         <span class="question" style="display: none;">Question</span> 
-        <input class="answer" value="" autocapitalize="off">
+        <input class="answer" value="answer" autocapitalize="off">
         <span class="feedback" style="display: none;">feedback</span>
       </p>
     </div>
     <form id="problems_form">
       <div id="problems"><p class="problem">
         <span class="question" style="display: none;"></span>
-        <input class="answer" value="" autocapitalize="off">
+        <input class="answer" value="answer" autocapitalize="off">
         <span class="feedback" id="feedback" style="display: none;"></span>
       </p></div>
       <input type="submit" value="Submit" style="display:none;">
     </form>
   
     <script type="text/javascript">
+
+//Generate Random Number 
+const random = (()=>{
+  const f = () => {
+    // https://en.wikipedia.org/wiki/Xorshift
+    let x = f.state;
+    x ^= x << 13;
+    x ^= x >> 17;
+    x ^= x << 5;
+    f.state = x
+    return (x + 0x80000000) / 0x100000000;
+  }
+  f.state = 10000;
+  return f;
+})();
 
 function unsuperscript(exponent) {
   let ret = '';
